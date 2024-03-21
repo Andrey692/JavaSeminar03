@@ -6,9 +6,15 @@ import java.util.List;
 
 public class Stream implements Iterable<StudentGroup> {
     private List<StudentGroup> groups;
+    private String name;
 
-    public Stream() {
+    public Stream(String name) {
+        this.name = name;
         groups = new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void addStudentGroup(StudentGroup group) {

@@ -1,57 +1,92 @@
 package HW;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        StudentGroup group1 = new StudentGroup("G545");
-        StudentGroup group2 = new StudentGroup("G546");
-        StudentGroup group3 = new StudentGroup("G547");
-        StudentGroup group4 = new StudentGroup("G548");
-        StudentGroup group5 = new StudentGroup("G549");
 
-        StudentGroup group6 = new StudentGroup("W545");
-        StudentGroup group7 = new StudentGroup("W546");
-        StudentGroup group8 = new StudentGroup("W547");
+        Stream stream1 = new Stream("поток 2001");
+        Stream stream2 = new Stream("поток 2002");
+        Stream stream3 = new Stream("поток 2003");
 
-        Stream stream1 = new Stream();
-        Stream stream2 = new Stream();
+        stream1.addStudentGroup(new StudentGroup("G545"));
+        stream1.addStudentGroup(new StudentGroup("G546"));
+        stream1.addStudentGroup(new StudentGroup("G547"));
+        stream1.addStudentGroup(new StudentGroup("G548"));
+        stream1.addStudentGroup(new StudentGroup("G549"));
 
-        stream1.addStudentGroup(group1);
-        stream1.addStudentGroup(group2);
-        stream1.addStudentGroup(group3);
-        stream1.addStudentGroup(group4);
-        stream1.addStudentGroup(group5);
+        stream2.addStudentGroup(new StudentGroup("W545"));
+        stream2.addStudentGroup(new StudentGroup("W546"));
+        stream2.addStudentGroup(new StudentGroup("W547"));
 
-        stream2.addStudentGroup(group6);
-        stream2.addStudentGroup(group7);
-        stream2.addStudentGroup(group8);
-        System.out.println("поток N1");
-        for (StudentGroup group : stream1) {
-            System.out.println(group);
-        }
-        System.out.println();
+        stream3.addStudentGroup(new StudentGroup("F545"));
+        stream3.addStudentGroup(new StudentGroup("F546"));
+        stream3.addStudentGroup(new StudentGroup("F547"));
+        stream3.addStudentGroup(new StudentGroup("F548"));
+        stream3.addStudentGroup(new StudentGroup("F549"));
+        stream3.addStudentGroup(new StudentGroup("F541"));
 
-        System.out.println("поток N2");
-        for (StudentGroup group : stream2) {
-            System.out.println(group);
-        }
+        // System.out.println();
+        // for (StudentGroup group : stream1) {
+        // System.out.println(group);
+        // }
+        // System.out.println();
+
+        // System.out.println("поток N2");
+        // for (StudentGroup group : stream2) {
+        // System.out.println(group);
+        // }
+        // System.out.println();
+
+        // System.out.println("поток N3");
+        // for (StudentGroup group : stream3) {
+        // System.out.println(group);
+        // }
+        // System.out.println();
 
         // StreamIterator iterator = new StreamIterator(stream1);
         // while (iterator.hasNext()) {
         // System.out.println(iterator.next());
         // }
 
-        // Сравниваем количество групп в двух потоках
-        int res = Service.comp(stream1, stream2);
+        // Создаем список потоков
+        List<Stream> streams = new ArrayList<>();
+        streams.add(stream1);
+        streams.add(stream2);
+        streams.add(stream3);
 
-        // Выводим результат сравнения
-        if (res > 0) {
-            System.out.println("В потоке 1 больше групп.");
-        } else if (res < 0) {
-            System.out.println("В потоке 2 больше групп.");
-        } else {
-            System.out.println("Количество групп в обоих потоках одинаково.");
+        // список потоков до сортировки
+        for (Stream stream : streams) {
+            System.out.print(stream.getName());
+            for (StudentGroup group : stream) {
+                System.out.print(" " + group.getName());
+            }
+            System.out.println();
         }
+        System.out.println();
 
+        // Создаем объект StreamComparator
+        StreamComparator comparator = new StreamComparator();
+
+        // Сортируем список потоков с использованием компаратора
+        Collections.sort(streams, comparator);
+
+        // список потоков после сортировки
+        for (Stream stream : streams) {
+            System.out.print(stream.getName());
+            for (StudentGroup group : stream) {
+                System.out.print(" " + group.getName());
+            }
+            System.out.println();
+        }
+        System.out.println();
+
+        // Выводим отсортированные потоки с названием и количеством групп
+        for (Stream stream : streams) {
+            System.out.println(stream.getName() + " - количество групп: " + stream.size());
+        }
     }
 
 }

@@ -68,7 +68,7 @@ public class Main {
         System.out.println();
 
         // Создаем объект StreamComparator
-        StreamComparator comparator = new StreamComparator();
+        MyStreamComparator comparator = new MyStreamComparator();
 
         // Сортируем список потоков с использованием компаратора
         Collections.sort(streams, comparator);
